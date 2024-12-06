@@ -109,6 +109,12 @@ history = model.fit(
     verbose=0  # Suppress the default progress bar
 )
 
+model_h5_path = "./saved_model/my_resnet_model.h5"
+model.save(model_h5_path)  # Save in HDF5 format
+print(f"\nModel saved in HDF5 format at: {model_h5_path}")
+
+
+
 # Evaluate the model
 scores = model.evaluate(X_test, y_test, verbose=1)
 print(f"\nTest Accuracy: {scores[1] * 100:.2f}%")
