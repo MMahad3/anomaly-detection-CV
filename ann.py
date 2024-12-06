@@ -57,6 +57,10 @@ ann.compile(optimizer='SGD',
 ann.fit(X_train,y_train,epochs=5)
 ann.evaluate(X_test,y_test)
 
+model_h5_path = "./saved_model/my_ann_model.h5"
+model.save(model_h5_path)  # Save in HDF5 format
+print(f"\nModel saved in HDF5 format at: {model_h5_path}")
+
 y_pred= ann.predict(X_test)
 y_pred_classes = [np.argmax(element) for element in y_pred]
 # print("classification_report: \n",classification_report(y_test,y_pred_classes,target_names=class_names, zero_division=0))
