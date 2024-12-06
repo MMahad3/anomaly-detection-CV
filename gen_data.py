@@ -1,13 +1,15 @@
 import os
 import numpy as np
 import cv2
-from sklearn.model_selection import train_test_split
 
-# Dataset path and target size
-dataset_path = "./dataset/Train"  # Replace with your dataset folder path
-image_size = (64, 64)
+# Paths to dataset folders and target size
+train_path = "./dataset/Train"  # Replace with your training dataset folder path
+test_path = "./dataset/Test"    # Replace with your testing dataset folder path
+image_size = (64, 64)           # Target image size
 
-def preprocess_and_save(dataset_path, image_size, save_path, test_size=0.2, random_state=42):
+
+def preprocess_dataset(dataset_path, image_size):
+    """Preprocess images and labels from a given dataset path."""
     images = []
     labels = []
     class_names = sorted(os.listdir(dataset_path))  # Get folder names (class labels)
@@ -22,26 +24,42 @@ def preprocess_and_save(dataset_path, image_size, save_path, test_size=0.2, rand
                     img = cv2.resize(img, image_size)  # Resize to target size
                     images.append(img)
                     labels.append(class_name)  # Class label from folder name
+
+    return images, labels, class_names
+
+
+def preprocess_and_save(train_path, test_path, image_size, save_path):
+    """Preprocess train and test datasets and save to a compressed .npz file."""
+    # Process training data
+    print("Processing training data...")
+    train_images, train_labels, class_names = preprocess_dataset(train_path, image_size)
     
-    # Convert labels to numerical values
+    # Process testing data
+    print("Processing testing data...")
+    test_images, test_labels, _ = preprocess_dataset(test_path, image_size)
+
+    # Map class names to numeric labels
     class_to_label = {name: idx for idx, name in enumerate(class_names)}
-    labels = np.array([class_to_label[label] for label in labels])
+    train_labels = np.array([class_to_label[label] for label in train_labels])
+    test_labels = np.array([class_to_label[label] for label in test_labels])
 
-    # Convert to arrays
-    X = np.array(images, dtype=np.float32) / 255.0  # Normalize pixel values
-    y = np.array(labels)
+    # Convert to NumPy arrays and normalize
+    X_train = np.array(train_images, dtype=np.float32) / 255.0
+    y_train = np.array(train_labels)
+    X_test = np.array(test_images, dtype=np.float32) / 255.0
+    y_test = np.array(test_labels)
 
-    # Train-test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-    # Save the data in a single file
-    np.savez_compressed(save_path, 
-                        X_train=X_train, X_test=X_test, 
-                        y_train=y_train, y_test=y_test, 
+    # Save the preprocessed dataset
+    np.savez_compressed(save_path,
+                        X_train=X_train, y_train=y_train,
+                        X_test=X_test, y_test=y_test,
                         class_names=np.array(class_names))
     print("Dataset saved successfully!")
+
 
 # Specify save path
 save_path = "./preprocessed_dataset/dataset.npz"
 os.makedirs(os.path.dirname(save_path), exist_ok=True)
-preprocess_and_save(dataset_path, image_size, save_path)
+
+# Preprocess and save the dataset
+preprocess_and_save(train_path, test_path, image_size, save_path)
