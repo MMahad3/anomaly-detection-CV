@@ -11,12 +11,13 @@ from sklearn.metrics import classification_report
 import pandas as pd
 
 
-# Path to dataset folder
-dataset_path = "./dataset/Train"  # Replace with your dataset folder path
-image_size = (64, 64)  # ResNet input size
+# Paths to dataset folders
+train_path = "./dataset/Train"  # Replace with your train dataset folder path
+test_path = "./dataset/Test"    # Replace with your test dataset folder path
+image_size = (64, 64)           # ResNet input size
 
 # Load images and labels
-def load_images_from_folders(dataset_path, image_size):
+def load_images_from_folder(dataset_path, image_size):
     images = []
     labels = []
     class_names = sorted(os.listdir(dataset_path))  # Get folder names (class labels)
@@ -32,10 +33,23 @@ def load_images_from_folders(dataset_path, image_size):
                     labels.append(class_name)  # Class label from folder name
     return images, labels, class_names
 
-# Load data
-images, labels, class_names = load_images_from_folders(dataset_path, image_size)
+# Load training data
+train_images, train_labels, class_names = load_images_from_folder(train_path, image_size)
+
+# Load test data
+test_images, test_labels, _ = load_images_from_folder(test_path, image_size)
+
+# Convert training data to NumPy arrays
+X_train = np.array(train_images, dtype=np.float32) / 255.0  # Normalize pixel values
+y_train = pd.get_dummies(train_labels).values  # One-hot encode class labels
+
+# Convert testing data to NumPy arrays
+X_test = np.array(test_images, dtype=np.float32) / 255.0  # Normalize pixel values
+y_test = pd.get_dummies(test_labels).values  # One-hot encode class labels
 
 print("\nData loading done")
+print(f"X_train shape: {X_train.shape}, y_train shape: {y_train.shape}")
+print(f"X_test shape: {X_test.shape}, y_test shape: {y_test.shape}")
 
 # Convert to NumPy arrays
 X = np.array(images, dtype=np.float32) / 255.0  # Normalize pixel values
