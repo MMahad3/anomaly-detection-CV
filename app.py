@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
@@ -7,6 +8,7 @@ from werkzeug.utils import secure_filename
 import cv2
 import os
 from flask_cors import CORS
+from keras.layers import TFSMLayer
 
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing for development
@@ -16,7 +18,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Load trained model
-model = load_model('/drive/MyDrive/FYP/hybrid_vit_model.h5')
+model = load_model('C:/FAST UNIVERSITY/7th semester/FYP-I/saved models/CNN.h5')
 
 # Function to preprocess a single frame
 def preprocess_frame(frame):
@@ -31,48 +33,67 @@ def preprocess_frame(frame):
 def health_check():
     return jsonify({'status': 'OK'}), 200
 
-# Endpoint for video classification
+# Endpoint for image or video classification
 @app.route('/classify', methods=['POST'])
-def classify_video():
-    if 'video' not in request.files:
-        return jsonify({'error': 'No video provided'}), 400
+def classify():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file provided'}), 400
 
-    video = request.files['video']
-    filename = secure_filename(video.filename)
-    video_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    video.save(video_path)
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(file_path)
 
-    # Initialize variables for video processing
-    cap = cv2.VideoCapture(video_path)
+    # Initialize frame predictions list
     frame_predictions = []
-    frame_count = 0
 
-    # Process the video frame by frame
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
+    # Check if the uploaded file is a video or an image
+    if filename.lower().endswith(('mp4', 'avi', 'mov', 'mkv')):
+        # Process video frame by frame
+        cap = cv2.VideoCapture(file_path)
+        frame_count = 0
 
-        frame_count += 1
-        # Analyze every 10th frame for efficiency
-        if frame_count % 10 == 0:
-            processed_frame = preprocess_frame(frame)
-            prediction = model.predict(processed_frame)
-            predicted_class = np.argmax(prediction, axis=1)[0]
-            frame_predictions.append(predicted_class)
+        # Process the video frame by frame
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
 
-    cap.release()
-    os.remove(video_path)  # Delete the temporary video file
+            frame_count += 1
+            # Analyze every 10th frame for efficiency
+            if frame_count % 10 == 0:
+                processed_frame = preprocess_frame(frame)
+                prediction = model.predict(processed_frame)
+                predicted_class = np.argmax(prediction, axis=1)[0]
+                frame_predictions.append(predicted_class)
 
-    # Determine the most common class
+        cap.release()
+    else:
+        # Process the image as a single frame video
+        image = cv2.imread(file_path)
+        processed_frame = preprocess_frame(image)
+        prediction = model.predict(processed_frame)
+        predicted_class = np.argmax(prediction, axis=1)[0]
+        frame_predictions.append(predicted_class)
+
+    os.remove(file_path)  # Delete the uploaded file after processing
+
+    # Determine the class for the video
     if frame_predictions:
         class_titles = ['Abuse', 'Arrest', 'Arson', 'Assault', 'Burglary',
                         'Explosion', 'Fighting', 'NormalVideos', 'RoadAccident',
-                        'Robbery', 'Shooting', 'Shoplifting','Stealing','Vandalism']
-        most_common_class = max(set(frame_predictions), key=frame_predictions.count)
-        result = class_titles[most_common_class]
+                        'Robbery', 'Shooting', 'Shoplifting', 'Stealing', 'Vandalism']
+        
+        # Check if all frames are classified as "NormalVideos"
+        if all(predicted_class == class_titles.index("NormalVideos") for predicted_class in frame_predictions):
+            result = "NormalVideos"
+        else:
+            # Take the most common non-"NormalVideos" class
+            non_normal_classes = [pred for pred in frame_predictions if pred != class_titles.index("NormalVideos")]
+            most_common_class = max(set(non_normal_classes), key=non_normal_classes.count)
+            result = class_titles[most_common_class]
     else:
-        result = 'Unable to classify the video.'
+        result = 'Unable to classify the content.'
 
     return jsonify({'result': result}), 200
 
