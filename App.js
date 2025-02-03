@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import "./App.css"; // Import your CSS file
-import demoVideo from "./assets/videos/ANOMALY DETECTION.mp4"; // Import your video file
-import logo from "./assets/images/logo.jpg"; // Import your logo image
+import "./App.css"; 
+import demoVideo from "./assets/videos/ANOMALY DETECTION.mp4"; 
+import logo from "./assets/images/logo.jpg"; 
 import mahad from "./assets/images/mahad.png";
 import asad from "./assets/images/asad.png";
 import taha from "./assets/images/taha.png";
