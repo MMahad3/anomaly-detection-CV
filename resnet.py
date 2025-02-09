@@ -20,7 +20,7 @@ image_size = (64, 64)           # ResNet input size
 def load_images_from_folder(dataset_path, image_size):
     images = []
     labels = []
-    class_names = sorted(os.listdir(dataset_path))  # Get folder names (class labels)
+    class_names = sorted(os.listdir(dataset_path))  # Get the folder names (class labels)
     for class_name in class_names:
         class_folder = os.path.join(dataset_path, class_name)
         if os.path.isdir(class_folder):  # Ensure it's a folder
