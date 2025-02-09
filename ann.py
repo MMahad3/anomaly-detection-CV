@@ -22,15 +22,15 @@ print(f"X_test shape: {X_test.shape}")
 # print(y_train[:5])
 # print(class_names[5])
 
-# Data augmentation
-# datagen = ImageDataGenerator(
+# Data  augmentation
+# datagen=ImageDataGenerator(
 #     rotation_range=10,  # Reduced rotation range
 #     width_shift_range=0.1,  # Reduced width shift
-#     height_shift_range=0.1,  # Reduced height shift
-#     shear_range=0.1,  # Reduced shear
+#     height_shidft_range=0.1,  # Reduced height shift
+#     shear_ran0.1,  # Reduced shear
 #     zoom_range=0.1,  # Reduced zoom range
 #     horizontal_flip=True,
-#     fill_mode='nearest'
+#     fill_mode="nearest"
 # )
 
 # datagen.fit(X_train)
