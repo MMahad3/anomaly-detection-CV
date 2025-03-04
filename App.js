@@ -10,7 +10,7 @@ import taha from "./assets/images/taha.png";
 function Front() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [classificationResult, setClassificationResult] = useState("");
-  const [showSplash, setShowSplash] = useState(true); // State to control splash screen visibility
+  const [showSplash, setShowSplash] = useState(true);
 
   // Simulate splash screen duration
   useEffect(() => {
