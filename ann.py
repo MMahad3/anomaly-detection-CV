@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
-# from tensorflow.keras.preprocessing.image import 
+# from tensorflow.keras.prepr
 from tensorflow.keras import layers, models
 from sklearn.metrics import classification_report,confusion_matrix
 import matplotlib.pyplot as plt
