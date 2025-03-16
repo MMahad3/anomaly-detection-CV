@@ -5,7 +5,7 @@ import cv2
 # Paths to dataset folders and target size
 train_path = "./dataset/Train"  # Replace with your training dataset folder path
 test_path = "./dataset/Test"    # Replace with your testing dataset folder path
-image_size = (64, 64)           # Target image size
+image_size = (64, 64)           
 
 
 def preprocess_dataset(dataset_path, image_size):
