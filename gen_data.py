@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 # Paths to dataset folders and target size
-train_path = "./dataset/Train"  # Replace with your training dataset folder path
+train_path = "./dataset/Train"  
 test_path = "./dataset/Test"  
 image_size = (64, 64)           
 
