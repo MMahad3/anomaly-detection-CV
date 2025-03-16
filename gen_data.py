@@ -49,7 +49,7 @@ def preprocess_and_save(train_path, test_path, image_size, save_path):
     X_test = np.array(test_images, dtype=np.float32) / 255.0
     y_test = np.array(test_labels)
 
-    # Save the preprocessed dataset
+    # Save the preprocessed
     np.savez_compressed(save_path,
                         X_train=X_train, y_train=y_train,
                         X_test=X_test, y_test=y_test,
