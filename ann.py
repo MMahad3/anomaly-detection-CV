@@ -25,8 +25,8 @@ print(f"X_test shape: {X_test.shape}")
 # datagen=ImageDataGenerator(
 #     rotation_range=10,  # Reduced rotation range
 #     width_shift_range=0.1,  # Reduced width shift
-#     height_shidft_range=0.1,  # Reduced height shift
-#  
+
+ 
 
 def plot_sample(X,y,index):
     plt.figure(figsize=(3,2))
