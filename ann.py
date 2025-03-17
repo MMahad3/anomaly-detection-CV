@@ -19,7 +19,6 @@ print(f"Loaded dataset:")
 print(f"X_train shape: {X_train.shape}")
 print(f"X_test shape: {X_test.shape}")
 # print(y_train[:5])
-# print
 
 
 
