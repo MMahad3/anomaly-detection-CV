@@ -24,7 +24,7 @@ print(f"X_test shape: {X_test.shape}")
 # Data  augmentation
 # datagen=ImageDataGenerator(
 #     rotation_range=10,  # Reduced rotation range
-#     width_shift_range=0.1,  # Reduced width shift
+#     width_shift_r
 
  
 
