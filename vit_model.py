@@ -150,7 +150,7 @@ checkpoint_callback=tf.keras.callbacks.ModelCheckpoint(
     save_weights_only=True,
 )
 
-# input_shape = (image_size, image_size, 3)
+# input_shape = 
 
 
 
