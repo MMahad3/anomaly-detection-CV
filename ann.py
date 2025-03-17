@@ -19,12 +19,6 @@ print(f"Loaded dataset:")
 print(f"X_train shape: {X_train.shape}")
 print(f"X_test shape: {X_test.shape}")
 
-
-
-
-
- 
-
 def plot_sample(X,y,index):
     plt.figure(figsize=(3,2))
     plt.imshow(X[index])
