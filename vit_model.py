@@ -151,7 +151,7 @@ checkpoint_callback=tf.keras.callbacks.ModelCheckpoint(
 )
 
 # input_shape = (image_size, image_size, 3)  # Assuming 64x64 RGB images
-# num_classes = 
+
 
 
 def run_experiment(model):
