@@ -13,7 +13,7 @@ import pandas as pd
 
 # Paths to dataset folders
 train_path = "./dataset/Train" 
-test_path = "./dataset/Test"    # Replace with your test dataset f
+test_path = "./dataset/Test"    # Replace with your test 
 image_size = (64, 64)           # ResNet input size
 
 # Load images and labels
