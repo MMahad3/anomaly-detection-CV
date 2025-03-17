@@ -55,7 +55,7 @@ print(f"X_test shape: {X_test.shape}, y_test shape: {y_test.shape}")
 X = np.array(images, dtype=np.float32) / 255.0  # Normalize pixel values
 y = pd.get_dummies(labels).values  # One-hot encode class labels
 
-# Train-tes
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Data augmentation
