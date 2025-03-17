@@ -12,7 +12,7 @@ import pandas as pd
 
 
 # Paths to dataset folders
-train_path = "./dataset/Train"  # Replace with your train data
+train_path = "./dataset/Train"  # Replace with you
 test_path = "./dataset/Test"    # Replace with your test dataset folder path
 image_size = (64, 64)           # ResNet input size
 
