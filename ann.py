@@ -26,13 +26,7 @@ print(f"X_test shape: {X_test.shape}")
 #     rotation_range=10,  # Reduced rotation range
 #     width_shift_range=0.1,  # Reduced width shift
 #     height_shidft_range=0.1,  # Reduced height shift
-#     shear_ran0.1,  # Reduced shear
-#     zoom_range=0.1,  # Reduced zoom range
-#     horizontal_flip=True,
-#     fill_mode="nearest"
-# )
-
-# datagen.fit(X_train)
+#  
 
 def plot_sample(X,y,index):
     plt.figure(figsize=(3,2))
