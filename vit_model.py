@@ -200,6 +200,6 @@ def run_experiment(model):
     return history
 
 input_shape = (image_size, image_size, 3)  # Assuming 64x64 RGB images
-num_classes = len(class_names)  # Ensu
+num_classes = len(class_names)  
 vit_classifier = create_vit_classifier()
 history = run_experiment(vit_classifier)
