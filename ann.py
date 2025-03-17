@@ -21,7 +21,7 @@ print(f"X_test shape: {X_test.shape}")
 # print(y_train[:5])
 # print(class_names[5])
 
-# Data  augmentation
+
 
 
  
