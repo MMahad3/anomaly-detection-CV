@@ -47,5 +47,5 @@ print(f"\nModel saved in HDF5 format at: {model_h5_path}")
 
 y_pred= ann.predict(X_test)
 y_pred_classes = [np.argmax(element) for element in y_pred]
-# print("classification_report: \n",classification
+# print("classification_report:
 print("classification_report\n",classification_report(y_test,y_pred_classes))
