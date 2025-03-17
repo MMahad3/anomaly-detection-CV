@@ -22,8 +22,7 @@ print(f"X_test shape: {X_test.shape}")
 # print(class_names[5])
 
 # Data  augmentation
-# datagen=ImageDataGenerator(
-#     ro
+
 
  
 
