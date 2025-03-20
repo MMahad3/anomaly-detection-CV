@@ -12,7 +12,7 @@ function Front() {
   const [classificationResult, setClassificationResult] = useState("");
   const [showSplash, setShowSplash] = useState(true);
 
-  // Simulate splash screen duration
+
   useEffect(() => {
     const splashTimeout = setTimeout(() => setShowSplash(false), 8000); // 8 seconds
     return () => clearTimeout(splashTimeout); // Cleanup timeout
