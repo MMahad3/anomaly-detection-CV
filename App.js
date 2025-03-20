@@ -18,7 +18,7 @@ function Front() {
     return () => clearTimeout(splashTimeout); // Cleanup timeout
   }, []);
 
-  // Handle file upload (video or image) and send it to the backend
+  // Handle file upload and send it to the backend
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
