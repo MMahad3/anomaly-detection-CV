@@ -54,7 +54,7 @@ function Front() {
 if (showSplash) {
   return (
     <div className="splash-screen">
-      {/* Animated Logo */}
+      
       <motion.div
         initial={{ scale: 0, opacity: 0, y: -200 }}
         animate={{ scale: 1.5, opacity: 1, y: 0 }}
