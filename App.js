@@ -68,7 +68,7 @@ if (showSplash) {
         <img src={logo} alt="Logo" className="splash-logo" />
       </motion.div>
 
-      {/* Animated Text Message */}
+      
       <div className="splash-message-container">
         {"Your Gateway Towards Safety".split(" ").map((word, index) => (
           <motion.span
