@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
-# Load dat
+# Load
 data = np.load("./preprocessed_dataset/dataset.npz")
 
 X_train = data['X_train']
