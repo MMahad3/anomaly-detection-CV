@@ -11,7 +11,7 @@ from flask_cors import CORS
 from keras.layers import TFSMLayer
 
 app = Flask(__name__)
-CORS(app)  # Enable Cross Origin Resource Shr
+CORS(app)  # Enable Cross Origin Resour
 
 # Configure upload folder
 app.config['UPLOAD_FOLDER'] = 'uploads'
