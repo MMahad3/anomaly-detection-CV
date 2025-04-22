@@ -15,7 +15,7 @@ function Front() {
 
   useEffect(() => {
     const splashTimeout = setTimeout(() => setShowSplash(false), 8000); // 8 seconds
-    return () => clearTimeout(splashTimeout); // Cleanup timeout
+    return () => clearTimeout(splashTimeout); 
   }, []);
 
   // Handle file upload and send it to the backend
